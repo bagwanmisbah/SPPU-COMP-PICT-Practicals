@@ -1,3 +1,4 @@
+; AUTHOR :  MISBAH BAGWAN 21487
 section .data
     msg1 db "Array elements are: ",0ah
     len1 equ $-msg1
