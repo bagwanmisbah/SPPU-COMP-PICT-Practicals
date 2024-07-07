@@ -1,6 +1,6 @@
-#HELLO WORLD IN ASSEMBLY (64-bit)
-#https://www.mycompiler.io/online-assembly-asm-compiler
-#ctrl+click to follow above link | to be used for practice 
+;HELLO WORLD IN ASSEMBLY (64-bit)
+;https://www.mycompiler.io/online-assembly-asm-compiler
+;ctrl+click to follow above link | to be used for practice 
 
 section  .data
     msg db "Hello world!", 0ah		;string to be printed db means define Byte
