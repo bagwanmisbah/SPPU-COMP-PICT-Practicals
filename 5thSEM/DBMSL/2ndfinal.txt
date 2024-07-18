@@ -1,0 +1,309 @@
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use te31455_db
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> CREATE TABLE Dept2 (
+    ->     Dept_id INT NOT NULL,
+    ->     Dept_name VARCHAR(50),
+    ->     Dept_location VARCHAR(50),
+    ->     PRIMARY KEY (Dept_id)
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> CREATE TABLE Employee2 (
+    ->     Emp_id INT NOT NULL,
+    ->     Dept_id INT,
+    ->     Emp_fname VARCHAR(50),
+    ->     Emp_lname VARCHAR(50),
+    ->     Emp_position VARCHAR(50),
+    ->     Emp_salary DECIMAL(10, 2),
+    ->     Emp_JoinDate DATE,
+    ->     PRIMARY KEY (Emp_id),
+    ->     FOREIGN KEY (Dept_id) REFERENCES Dept2(Dept_id) ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> CREATE TABLE Project2 (
+    ->     Proj_id INT NOT NULL,
+    ->     Dept_id INT,
+    ->     Proj_Name VARCHAR(100),
+    ->     Proj_Location VARCHAR(50),
+    ->     Proj_cost DECIMAL(10, 2),
+    ->     Proj_year DATE,
+    ->     PRIMARY KEY (Proj_id),
+    ->     FOREIGN KEY (Dept_id) REFERENCES Dept2(Dept_id) ON DELETE CASCADE
+    -> );
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> INSERT INTO Dept2 (Dept_id, Dept_name, Dept_location) VALUES
+    ->     (20, 'IT', 'Mumbai'),
+    ->     (25, 'Computer', 'Pune'),
+    ->     (30, 'ENTC', 'Nashik');
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+/*1. Insert at least 10 records in the Employee table and insert other tables accordingly.*/
+
+mysql> INSERT INTO Employee2 VALUES
+    ->     (100, 20, 'Misbah', 'Bagwan', 'Engineer', 25000.0, '2012-02-26'),
+    ->     (101, 25, 'Raj', 'Sharma', 'Clerk', 15000.0, '1985-07-16'),
+    ->     (102, 30, 'Manu', 'Kapoor', 'Receptionist', 10000.0, '2014-04-02'),
+    ->     (103, 25, 'Sakshi', 'Dixit', 'HOD-IT', 80000.0, '2012-07-09'),
+    ->     (104, 30, 'Rakhi', 'Nevase', 'Peon', 8000.0, '2013-08-04'),
+    ->     (105, 20, 'Renuka', 'Dharmadhikari', 'Manager', 55000.0, '2011-09-03'),
+    ->     (106, 25, 'Harsh', 'Devgan', 'Engineer', 35000.0, '2008-03-08'),
+    ->     (107, 20, 'Priti', 'Yadav', 'CEO', 100000.0, '2006-12-07'),
+    ->     (108, 25, 'Priya', 'Patil', 'Manager', 45000.0, '1981-11-05'),
+    ->     (109, 30, 'Hari', 'Tiwari', 'Engineer', 30000.0, '1978-10-25');
+Query OK, 10 rows affected (0.12 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Project2 VALUES
+    ->     (200, 20, 'Project A', 'Mumbai', 120000.0, '2003-01-15'),
+    ->     (201, 25, 'Project B', 'Pune', 80000.0, '2007-07-16'),
+    ->     (202, 30, 'Project C', 'Nashik', 150000.0, '2004-04-02'),
+    ->     (203, 20, 'Project D', 'Mumbai', 90000.0, '2007-07-09'),
+    ->     (204, 25, 'Project E', 'Pune', 200000.0, '2021-08-04'),
+    ->     (205, 30, 'Project F', 'Nashik', 300000.0, '2020-09-03'),
+    ->     (206, 20, 'Project G', 'Mumbai', 180000.0, '2005-03-08'),
+    ->     (207, 25, 'Project H', 'Pune', 250000.0, '2005-12-07'),
+    ->     (208, 30, 'Project I', 'Nashik', 400000.0, '2004-11-05'),
+    ->     (209, 20, 'Project J', 'Mumbai', 350000.0, '2007-10-25');
+Query OK, 10 rows affected (0.10 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+/*2.Display all Employee details with Department ‘Computer’ and ‘IT’ and Employee
+first name starting with  'p' or 'h'.*/
+
+mysql> SELECT *
+    -> FROM Employee2
+    -> WHERE Dept_id IN (SELECT Dept_id FROM Dept2 WHERE Dept_name IN ('Computer', 'IT'))
+    -> AND (Emp_fname LIKE 'P%' OR Emp_fname LIKE 'H%');
++--------+---------+-----------+-----------+--------------+------------+--------------+
+| Emp_id | Dept_id | Emp_fname | Emp_lname | Emp_position | Emp_salary | Emp_JoinDate |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+|    106 |      25 | Harsh     | Devgan    | Engineer     |   35000.00 | 2008-03-08   |
+|    107 |      20 | Priti     | Yadav     | CEO          |  100000.00 | 2006-12-07   |
+|    108 |      25 | Priya     | Patil     | Manager      |   49500.00 | 1981-11-05   |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+2 rows in set (0.00 sec)
+
+/*3. lists the number of different Employee Positions.  */
+mysql> SELECT Emp_position, COUNT(*) AS Num_Employees
+    -> FROM Employee2
+    -> GROUP BY Emp_position;
++--------------+---------------+
+| Emp_position | Num_Employees |
++--------------+---------------+
+| CEO          |             1 |
+| Clerk        |             1 |
+| Engineer     |             3 |
+| HOD-IT       |             1 |
+| Manager      |             2 |
+| Peon         |             1 |
+| Receptionist |             1 |
++--------------+---------------+
+7 rows in set (0.01 sec)
+
+/*4. Give 10% increase in Salary of the Employee whose Birthdate before 1985. */ 
+
+mysql> UPDATE Employee2
+    -> SET Emp_salary = Emp_salary * 1.1
+    -> WHERE YEAR(Emp_JoinDate) < 1985;
+Query OK, 2 rows affected (0.07 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> SELECT * FROM Employee2 WHERE YEAR(Emp_JoinDate) < 1985;
++--------+---------+-----------+-----------+--------------+------------+--------------+
+| Emp_id | Dept_id | Emp_fname | Emp_lname | Emp_position | Emp_salary | Emp_JoinDate |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+|    108 |      25 | Priya     | Patil     | Manager      |   49500.00 | 1981-11-05   |
+|    109 |      30 | Hari      | Tiwari    | Engineer     |   33000.00 | 1978-10-25   |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+2 rows in set (0.01 sec)
+
+/*5. Delete Department details which location is ‘Mumbai’.  */
+
+mysql> DELETE FROM Dept2 WHERE Dept_location = 'Mumbai';
+Query OK, 1 row affected (0.10 sec)
+
+/*AFTER DELETING*/
+mysql> SELECT * FROM Dept2;
++---------+-----------+---------------+
+| Dept_id | Dept_name | Dept_location |
++---------+-----------+---------------+
+|      25 | Computer  | Pune          |
+|      30 | ENTC      | Nashik        |
++---------+-----------+---------------+
+2 rows in set (0.00 sec)
+
+/*6. Find the names of Projects with location ‘pune’  .  */
+
+mysql> SELECT Proj_Name FROM Project2 WHERE Proj_Location = 'Pune';
++-----------+
+| Proj_Name |
++-----------+
+| Project B |
+| Project E |
+| Project H |
++-----------+
+3 rows in set (0.00 sec)
+
+/*7. Find the project having cost in between 100000 to 500000.*/ 
+
+mysql> SELECT * FROM Project2 WHERE Proj_cost >= 100000 AND Proj_cost <= 500000;
++---------+---------+-----------+---------------+-----------+------------+
+| Proj_id | Dept_id | Proj_Name | Proj_Location | Proj_cost | Proj_year  |
++---------+---------+-----------+---------------+-----------+------------+
+|     202 |      30 | Project C | Nashik        | 150000.00 | 2004-04-02 |
+|     204 |      25 | Project E | Pune          | 200000.00 | 2021-08-04 |
+|     205 |      30 | Project F | Nashik        | 300000.00 | 2020-09-03 |
+|     207 |      25 | Project H | Pune          | 250000.00 | 2005-12-07 |
+|     208 |      30 | Project I | Nashik        | 400000.00 | 2004-11-05 |
++---------+---------+-----------+---------------+-----------+------------+
+5 rows in set (0.01 sec)
+
+/*8. Find the project having maximum price and find average of Project cost*/
+
+mysql> SELECT * FROM Project2 WHERE Proj_cost = (SELECT MAX(Proj_cost) FROM Project2);
++---------+---------+-----------+---------------+-----------+------------+
+| Proj_id | Dept_id | Proj_Name | Proj_Location | Proj_cost | Proj_year  |
++---------+---------+-----------+---------------+-----------+------------+
+|     208 |      30 | Project I | Nashik        | 400000.00 | 2004-11-05 |
++---------+---------+-----------+---------------+-----------+------------+
+1 row in set (0.02 sec)
+
+mysql> SELECT AVG(Proj_cost) AS Avg_Project_Cost FROM Project2;
++------------------+
+| Avg_Project_Cost |
++------------------+
+|    230000.000000 |
++------------------+
+1 row in set (0.00 sec)
+
+/*9. Display all employees with Emp _id  and Emp name in decreasing order of
+     Emp_lname */
+
+mysql> SELECT Emp_id, CONCAT(Emp_fname, ' ', Emp_lname) AS Emp_name
+    -> FROM Employee2
+    -> ORDER BY Emp_lname DESC;
++--------+--------------+
+| Emp_id | Emp_name     |
++--------+--------------+
+|    109 | Hari Tiwari  |
+|    101 | Raj Sharma   |
+|    108 | Priya Patil  |
+|    104 | Rakhi Nevase |
+|    102 | Manu Kapoor  |
+|    103 | Sakshi Dixit |
+|    106 | Harsh Devgan |
++--------+--------------+
+7 rows in set (0.00 sec)
+
+/*10. Display Proj_name,Proj_location ,Proj_cost of all project started in 2004,2005,2007 */
+
+mysql> SELECT Proj_Name, Proj_Location, Proj_cost
+    -> FROM Project2
+    -> WHERE YEAR(Proj_year) IN ('2004', '2005', '2007');
++-----------+---------------+-----------+
+| Proj_Name | Proj_Location | Proj_cost |
++-----------+---------------+-----------+
+| Project B | Pune          |  80000.00 |
+| Project C | Nashik        | 150000.00 |
+| Project H | Pune          | 250000.00 |
+| Project I | Nashik        | 400000.00 |
++-----------+---------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
+INDEXES
+SIMPLE INDEX
+
+mysql> CREATE INDEX idx_fname ON Employee2(Emp_fname);
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * 
+    -> FROM Employee2 
+    -> FORCE INDEX (idx_fname);
++--------+---------+-----------+-----------+--------------+------------+--------------+
+| Emp_id | Dept_id | Emp_fname | Emp_lname | Emp_position | Emp_salary | Emp_JoinDate |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+|    101 |      25 | Raj       | Sharma    | Clerk        |   15000.00 | 1985-07-16   |
+|    102 |      30 | Manu      | Kapoor    | Receptionist |   10000.00 | 2014-04-02   |
+|    103 |      25 | Sakshi    | Dixit     | HOD-IT       |   80000.00 | 2012-07-09   |
+|    104 |      30 | Rakhi     | Nevase    | Peon         |    8000.00 | 2013-08-04   |
+|    106 |      25 | Harsh     | Devgan    | Engineer     |   35000.00 | 2008-03-08   |
+|    108 |      25 | Priya     | Patil     | Manager      |   49500.00 | 1981-11-05   |
+|    109 |      30 | Hari      | Tiwari    | Engineer     |   33000.00 | 1978-10-25   |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+7 rows in set (0.00 sec)
+
+COMPOSITE INDEX
+CREATE unique INDEX idx_empid ON Employee1(emp_id);
+Query OK, 0 rows affected (0.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * from Employee1 FORCE index(idx_empid);
++--------+---------+-----------+-----------+--------------+------------+--------------+
+| Emp_id | Dept_id | Emp_fname | Emp_lname | Emp_position | Emp_salary | Emp_JoinDate |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+|    101 |      25 | Raj       | Sharma    | Clerk        |   15000.00 | 1985-07-16   |
+|    102 |      30 | Manu      | Kapoor    | Receptionist |   10000.00 | 2014-04-02   |
+|    103 |      25 | Sakshi    | Dixit     | HOD-IT       |   80000.00 | 2012-07-09   |
+|    104 |      30 | Rakhi     | Nevase    | Peon         |    8000.00 | 2013-08-04   |
+|    106 |      25 | Harsh     | Devgan    | Engineer     |   35000.00 | 2008-03-08   |
+|    108 |      25 | Priya     | Patil     | Manager      |   54450.00 | 1981-11-05   |
+|    109 |      30 | Hari      | Tiwari    | Engineer     |   36300.00 | 1978-10-25   |
++--------+---------+-----------+-----------+--------------+------------+--------------+
+7 rows in set (0.00 sec)
+
+VIEW
+A)SIMPLE VIEW
+
+mysql> create view proj_simple as select proj_name,proj_cost from Project1 where proj_cost>20000;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>   SELECT * from proj_simple;
++-----------+-----------+
+| proj_name | proj_cost |
++-----------+-----------+
+| Project B |  80000.00 |
+| Project C | 150000.00 |
+| Project E | 200000.00 |
+| Project F | 300000.00 |
+| Project H | 250000.00 |
+| Project I | 400000.00 |
++-----------+-----------+
+6 rows in set (0.00 sec)
+  
+B)COMPLEX VIEW
+  mysql> create view empdeptview  as select emp.Emp_id,emp.Emp_fname,emp.Emp_lname,dept.Dept_name
+    ->   from Employee1 emp
+    ->   INNER JOIN Dept1 dept
+    ->   ON emp.Dept_id=dept.Dept_id;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * FROM empdeptview;
++--------+-----------+-----------+-----------+
+| Emp_id | Emp_fname | Emp_lname | Dept_name |
++--------+-----------+-----------+-----------+
+|    101 | Raj       | Sharma    | Computer  |
+|    102 | Manu      | Kapoor    | ENTC      |
+|    103 | Sakshi    | Dixit     | Computer  |
+|    104 | Rakhi     | Nevase    | ENTC      |
+|    106 | Harsh     | Devgan    | Computer  |
+|    108 | Priya     | Patil     | Computer  |
+|    109 | Hari      | Tiwari    | ENTC      |
++--------+-----------+-----------+-----------+
+7 rows in set (0.01 sec)
+
+
