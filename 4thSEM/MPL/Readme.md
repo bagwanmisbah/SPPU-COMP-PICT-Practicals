@@ -22,10 +22,13 @@ System calls
     RDX// no .of bytes to be read written 
     in any case
     MOV RDI,1 for both input and output
+    ![image](https://github.com/user-attachments/assets/aeb41e58-0008-4b58-9342-fc9e9f49e6ed)
+
 
 ASSEMBLY LANGUAGE PROGRAMMING
 SELF | NOTES FOR REFERENCE
 NAME: MISBAH BAGWAN
+
 
 1.1	BASICS
 
@@ -124,7 +127,6 @@ EXECUTION  [LINUX  ONLY]
 
 ![image](https://github.com/user-attachments/assets/f6557b36-d154-4b8c-a7ad-98dc8ccf814b)
 
-![image](https://github.com/user-attachments/assets/aeb41e58-0008-4b58-9342-fc9e9f49e6ed)
 
  
  
