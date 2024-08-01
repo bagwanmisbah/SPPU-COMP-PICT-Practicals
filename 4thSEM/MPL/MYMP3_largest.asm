@@ -1,4 +1,7 @@
 ; AUTHOR :  MISBAH BAGWAN 21487
+
+;JAE transfers control to short- label if the first operand 
+;(which should be unsigned) was greater than or equal to the second operand
 section .data
     msg1 db "Array elements are: ",0ah
     len1 equ $-msg1
