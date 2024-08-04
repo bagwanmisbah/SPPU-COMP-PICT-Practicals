@@ -10,6 +10,7 @@ Compilation and executing in Linux systems ( using 'NASM' ) at PICT Lab
     ./filename
 
 use same filename instead of 's' , as multiple 's' in single folder will make it difficult to identify 
+
 System calls
 
     RAX//hold system call value
