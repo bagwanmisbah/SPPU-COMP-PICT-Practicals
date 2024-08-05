@@ -73,17 +73,25 @@ ex:
     add eax, ebx     ; adds ebx to eax
 
 ASSEMBLY LANGUAGE STATEMENTS:
+
 •	Executable instructions or instructions,
 tell the processor what to do. Each instruction consists of an operation code (opcode). Each executable instruction generates one machine language instruction.
+
 •	Assembler directives or pseudo-ops, and
 tell the assembler about the various aspects of the assembly process. These are non-executable and do not generate machine language instructions.
+
 •	Macros.
+
 o	a text substitution mechanism.
 
 GENERAL SYNTAX
+
 [label]   mnemonic   [operands]   [;comment]
+
 mnemonics refers to instruction code opcode to be executes ,what follows the mnemonic are operands upon which operation is to be performed 
+
 fields in square brackets above are optional, therefore it is not necessary to have label | operands | comments (depending upon operation to be performed)
+
 some examples:
 
     INC COUNT        ; Increment the memory variable COUNT
@@ -100,8 +108,9 @@ some examples:
     MOV AL, 10       ; Transfer the value 10 to the AL register
 
 HELLO WORLD IN ASSEMBLY (64-bit)
-https://www.mycompiler.io/online-assembly-asm-compiler
-ctrl+click to follow above link | to be used for practice 
+[online Assembler i used for practice]
+(https://www.mycompiler.io/online-assembly-asm-compiler). 
+| to be used for practice 
 
     section  .data
         msg db "Hello world!", 0ah		;string to be printed db means define Byte
