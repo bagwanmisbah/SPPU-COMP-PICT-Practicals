@@ -108,8 +108,8 @@ some examples:
     MOV AL, 10       ; Transfer the value 10 to the AL register
 
 HELLO WORLD IN ASSEMBLY (64-bit)
-[online Assembler i used for practice](https://www.mycompiler.io/online-assembly-asm-compiler). 
-| to be used for practice 
+[Online Assembler i used for practice](https://www.mycompiler.io/online-assembly-asm-compiler). 
+
 
     section  .data
         msg db "Hello world!", 0ah		;string to be printed db means define Byte
