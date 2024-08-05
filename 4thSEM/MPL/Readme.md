@@ -108,8 +108,7 @@ some examples:
     MOV AL, 10       ; Transfer the value 10 to the AL register
 
 HELLO WORLD IN ASSEMBLY (64-bit)
-[online Assembler i used for practice]
-(https://www.mycompiler.io/online-assembly-asm-compiler). 
+[online Assembler i used for practice](https://www.mycompiler.io/online-assembly-asm-compiler). 
 | to be used for practice 
 
     section  .data
