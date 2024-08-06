@@ -27,8 +27,7 @@ use same filename instead of 's' , as multiple 's' in single folder will make it
 ![image](https://github.com/user-attachments/assets/aeb41e58-0008-4b58-9342-fc9e9f49e6ed)
 
 
-ASSEMBLY LANGUAGE PROGRAMMING
-SELF | NOTES FOR REFERENCE
+### ASSEMBLY LANGUAGE PROGRAMMING NOTES FOR REFERENCE
 NAME: MISBAH BAGWAN
 
 
