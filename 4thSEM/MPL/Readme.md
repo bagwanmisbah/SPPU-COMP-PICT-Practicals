@@ -35,8 +35,11 @@ NAME: MISBAH BAGWAN
 
 An assembly program can be divided into three sections −
 •	The data section,
+
 •	The bss section, and
+
 •	The text section.
+
 data section:
 
     section.data
@@ -47,34 +50,44 @@ example:
         msg1 db "Program to accept 5 numbers and print them!",0xA ; 
         len1 equ $-msg1 ; length of msg1
 here ; indicates beginning of comment to be ignored by compiler
+
 bss section:
 	
      section.bss
 in this section we declare variables whose value can change from time to time
+
 example:
 
     section .bss
         num resb 16 ; array to store the user input
 
 above, num is an array ,resb refers to reserving bytes(8 bits) of 16 units each
+
 if this was resw we would be telling compiler to reserve 2 bytes(1 word)(16 bits) 
-this is equivalent to int arr[16]  //in my opinion – 
+
+this is equivalent to int arr[16]  //in my opinion ;) – 
+
 text section:
-The text section is used for keeping the actual code. This section must begin with the declaration global _start, which tells the kernel where the program execution begins.
+
+The text section is used for keeping the actual code. 
+must begin with the declaration global _start, which tells the kernel where the program execution begins.
 
     section.text
-       global _start
+	global _start
         _start:
 Comments:
 one line comments must precede with ;
+
 ex:
     
     add eax, ebx     ; adds ebx to eax
 
 ASSEMBLY LANGUAGE STATEMENTS:
 
+
 •	Executable instructions or instructions,
 tell the processor what to do. Each instruction consists of an operation code (opcode). Each executable instruction generates one machine language instruction.
+
 
 •	Assembler directives or pseudo-ops, and
 tell the assembler about the various aspects of the assembly process. These are non-executable and do not generate machine language instructions.
@@ -107,6 +120,7 @@ some examples:
     MOV AL, 10       ; Transfer the value 10 to the AL register
 
 HELLO WORLD IN ASSEMBLY (64-bit)
+
 [Online Assembler i used for practice](https://www.mycompiler.io/online-assembly-asm-compiler). 
 
 
