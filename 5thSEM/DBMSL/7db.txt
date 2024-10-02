@@ -1,0 +1,91 @@
+-----------------------------------------
+
+mysql> CREATE TABLE Library (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     book_name VARCHAR(100),
+    ->     available_copies INT
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE Library_Audit (
+    ->     audit_id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     record_id INT,
+    ->     operation VARCHAR(10),
+    ->     old_copies INT,
+    ->     change_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DELIMITER //
+mysql> CREATE TRIGGER before_update_library
+    -> BEFORE UPDATE ON Library
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO Library_Audit (record_id, operation, old_copies, change_time)
+    ->     VALUES (OLD.id, 'UPDATE', OLD.available_copies, NOW());
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> DELIMITER //
+mysql> CREATE TRIGGER before_delete_library
+    -> BEFORE DELETE ON Library
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO Library_Audit (record_id, operation, old_copies, change_time)
+    ->     VALUES (OLD.id, 'DELETE', OLD.available_copies, NOW());
+    -> END//
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> INSERT INTO Library (book_name, available_copies)VALUES ('Shriman Yogi', 5),('1984', 3),('The Alchemist', 4),('Bakula', 2),('MrutyunJay', 6);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Library;
++----+---------------+------------------+
+| id | book_name     | available_copies |
++----+---------------+------------------+
+|  1 | Shriman Yogi  |                5 |\
+|  2 | 1984          |                3 |
+|  3 | The Alchemist |                4 |
+|  4 | Bakula        |                2 |
+|  5 | MrutyunJay    |                6 |
++----+---------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> Update Library set book_name= "Do Epic Shit Done" where book_name = "1984";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Library_Audit;
++----------+-----------+-----------+------------+---------------------+
+| audit_id | record_id | operation | old_copies | change_time         |
++----------+-----------+-----------+------------+---------------------+
+|        1 |         2 | UPDATE    |          3 | 2024-09-10 08:15:39 |
++----------+-----------+-----------+------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Library;
++----+-------------------+------------------+
+| id | book_name         | available_copies |
++----+-------------------+------------------+
+|  1 | Shriman Yogi      |                5 |
+|  2 | Do Epic Shit Done |                3 |
+|  3 | The Alchemist     |                4 |
+|  4 | Bakula            |                2 |
+|  5 | MrutyunJay        |                6 |
++----+-------------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from Library where book_name = "Bakula";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from Library_Audit;
++----------+-----------+-----------+------------+---------------------+
+| audit_id | record_id | operation | old_copies | change_time         |
++----------+-----------+-----------+------------+---------------------+
+|        1 |         2 | UPDATE    |          3 | 2024-09-10 08:15:39 |
+|        2 |         4 | DELETE    |          2 | 2024-09-10 08:18:39 |
++----------+-----------+-----------+------------+---------------------+
+2 rows in set (0.00 sec)
