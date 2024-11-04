@@ -1,7 +1,11 @@
 download jar files from : https://dev.mysql.com/downloads/connector/j/
+
 in lib folder: copy jar file 
+
 ctrl+shift+p : type java:configure classpath
+
 go to edit workspace or simply add in libraries jar file in Project Settings 
+
 
 ![image](https://github.com/user-attachments/assets/7e98bd1d-d892-4ddb-b1f4-bfd22e9ecffb)
 
