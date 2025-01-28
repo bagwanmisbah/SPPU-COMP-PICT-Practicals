@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Florista - Menu</title>
+  <style>
+    /* General reset for margins and paddings */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    /* Page container */
+    .menu-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    /* Page title */
+    .menu-title {
+      text-align: center;
+      font-size: 32px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    /* Flower grid layout */
+    .flower-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Flower card */
+    .flower-card {
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .flower-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Flower image */
+    .flower-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    /* Flower name */
+    .flower-card h3 {
+      font-size: 20px;
+      color: #2c3e50;
+      margin: 15px 0 10px;
+    }
+
+    /* Order button */
+    .flower-card button {
+      padding: 10px 15px;
+      background-color: #2c3e50;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .flower-card button:hover {
+      background-color: #f1c40f;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Menu Container -->
+  <div class="menu-container">
+    <!-- Page Title -->
+    <h1 class="menu-title">Our Flower Bouquets</h1>
+
+    <!-- Flower Grid -->
+    <div class="flower-grid">
+      <!-- Bouquet 1 -->
+      <div class="flower-card">
+        <img src="images\rose1.jpg" alt="Rose Bouquet" width="400px" height="200px">
+        <h3>Rose Bouquet</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 2 -->
+      <div class="flower-card">
+        <img src="images\tulips.jpg" alt="Tulip Delight" width="400px" height="200px">
+        <h3>Tulip Delight</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 3 -->
+      <div class="flower-card">
+        <img src="images\sun1.jpg" alt="Sunflower Charm" width="400px" height="200px">
+        <h3>Sunflower Charm</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 4 -->
+      <div class="flower-card">
+        <img src="images\orc2.jpg" alt="Orchid Elegance" width="400px" height="200px">
+        <h3>Orchid Elegance</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 5 -->
+      <div class="flower-card">
+        <img src="images\da1.jpg" alt="Daisy Fresh" width="400px" height="200px">
+        <h3>Daisy Fresh</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 6 -->
+      <div class="flower-card">
+        <img src="images\lav1.jpg" alt="Lavender Bliss" width="400px" height="400px">
+        <h3>Lavender Bliss</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 7 -->
+      <div class="flower-card">
+        <img src="images\pe2.jpg" alt="Peony Perfection" width="400px" height="200px">
+        <h3>Peony Perfection</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 8 -->
+      <div class="flower-card">
+        <img src="images\lily1.jpg" alt="Lily Love" width="400px" height="200px">
+        <h3>Lily Love</h3>
+        <button>Order Now</button>
+      </div>
+
+      <!-- Bouquet 9 -->
+      <div class="flower-card">
+        <img src="images\mi1.jpg" alt="Mixed Blooms" width="400px" height="200px">
+        <h3>Mixed Blooms</h3>
+        <button>Order Now</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
