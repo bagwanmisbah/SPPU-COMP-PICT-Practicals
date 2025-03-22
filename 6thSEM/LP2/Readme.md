@@ -1,6 +1,6 @@
 # Course Schedule Solution
 
-## **Description**
+## **1.Description**
 This project provides a solution to the **Course Schedule** problem using **Topological Sorting (Kahn's Algorithm)**. The problem is solved using **Breadth-First Search (BFS)** to determine if all courses can be completed without conflicts due to prerequisite cycles. Additionally, the program returns a possible order in which courses can be completed.
 
 ### **Features**
@@ -11,7 +11,7 @@ This project provides a solution to the **Course Schedule** problem using **Topo
 
 ---
 
-## **Limitations**
+## **2.Limitations**
 The solution assumes **valid course numbers from 0 to numCourses - 1**.
 If multiple valid course orders exist, only one is returned.
 The program does **not** handle invalid inputs (e.g., negative course numbers).
@@ -24,9 +24,11 @@ The program does **not** handle invalid inputs (e.g., negative course numbers).
 - Java Development Kit (JDK) **8 or later**
 - A terminal or command prompt
 
-### **Steps to Compile**
+### **3.Steps to Compile Clear and detailed instructions **
 
 ![image](https://github.com/user-attachments/assets/c2b78e4b-b25a-4e59-b3f2-20d9d19b30b8)
+
+After downloading and extracting this folder : 
 
 1. **Navigate to the project folder** in your terminal:
    ```sh
@@ -42,21 +44,31 @@ This will create .class files of java program
 
     java CourseScheduleTest
     
-Instructions on how to execute included tests.
+## **4.Instructions on how to execute included tests.**
 
-The test cases are included in CourseScheduleTest.java and only the above two commands are needed to execute 
+The test cases are included in CourseScheduleTest.java 
+
+and only the above two commands are needed to execute 
+
 Above commands will create .class file for java program
 
-The main() method from where execution starts it in the CourseScheduleTest.java file 
+The main() method from where execution starts it in the CourseScheduleTest.java 
+file 
+
 thus for executing write :
 
     java CourseScheduleTest
 
 It contains a total of 5 testcases like 
+
 1 (Cycle exists)	
+
 2 (Valid order)	
+
 3 (No prerequisites)	
+
 4 (Cycle exists)
+
 5 (Valid order)
 
 TIME and Space complexity :
