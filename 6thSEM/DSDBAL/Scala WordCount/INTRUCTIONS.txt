@@ -1,0 +1,106 @@
+
+Assuming everything is installed and setup 
+
+open terminal and type 
+
+spark-shell --version
+
+STEP 1:Open Terminal 1 - Start Netcat Server
+
+nc -lk 9999
+
+(Keep this running—you'll type words here later.)
+
+STEP 2: OPEN TERMINAL 2 START SPARK shell
+
+spark-shell
+
+STEP 3:WRITE WORDCOUNT PROGRAM IN SPARK shell
+
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+
+Object WordCountStreaming{
+  def main(args:Array[String]):Unit={
+    val spark=SparkSession.builder
+    .appName("StructuredNetworkWordCount")
+    .master("local[*])
+    .getOrCreate()
+
+    val lines=spark.readStream
+    .format("socket")
+    .option("host","localhost")
+    .option("port",9999)
+    .load()
+
+    import spark.implicts._
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Defines a Scala object named WordCountStreaming.
+in scala object is like a singleton class only one instance 
+
+def main(args:Array[String]):Unit={
+  val spark=SparkSession.builder
+  .appName("StructuredNetworkWordCount")
+  .master("local[*]")
+  .getOrCreate()
+
+  val lines=spark.readStream
+  .format("socket")
+  .option("host","localhost")
+  .option("port",9999)
+  .load()
+
+  import spark.implicit._
+  val word=lines.as[String].flapMap(_.split(" " ))
+
+  val wordCounts=word.groupBy("value").count()
+  val query=wordCounts.writeStream
+  .outputMode("complete")
+  .start()
+
+  query.awaitTermination()
+}
+
+
+
+import spark.implicits._
+val words=lines.as[String].flatMap(._split(""))
+
+val wordCounts=words.groupBy("value").count()
+
+val query=wordCounts.writeStream
+.outputMode("complete")
+.format("console")
+.start()
+
+query.awaitTermination()
+}
+}
+
+
+import org

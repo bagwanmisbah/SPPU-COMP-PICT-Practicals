@@ -1,0 +1,68 @@
+hadoop version
+ls
+cd hadoop-3.4.1
+
+inside hadoop 3.4.1>ls
+
+inside hadoop 3.4.1>cd bin
+
+>hdoop@sel-a1-216-25:~/hadoop-3.4.1/bin$ ls
+
+container-executor hdfs mapred.cmd yarn
+hadoop hdfs.cmd oom-listener yarn.cmd
+hadoop.cmd mapred test-container-executor
+
+>hdoop@sel-a1-216-25:~/hadoop-3.4.1/bin$ start-dfs.sh
+
+>hdoop@sel-a1-216-25:~/hadoop-3.4.1/bin$ start-yarn.sh
+
+>hdoop@sel-a1-216-25:~/hadoop-3.4.1/bin$ jps
+
+MUST GIVE
+10824 ResourceManager
+10458 DataNode
+10938 NodeManager
+10315 NameNode
+11132 Jps
+10620 SecondaryNameNode
+
+
+------AFTER PROGRAM IN VS CODE ------
+1. 
+
+javac -classpath $(hadoop classpath) -d . WordCount.java
+
+javac is java compiler
+
+-classpath $(hadoop classpath) -d . WordCount.java :includes all Hadoop libraries in your compile path
+
+-d .: Means "put the .class files in the current directory (.)
+
+WordCount.java: The file you are compiling.
+
+2. CREATE A JAR file
+
+jar cf wc.jar WordCount*.class
+
+3.Create HDFS input directory and upload input.txt
+
+ IF USER DOESNT EXIST:
+
+hdfs dfs -mkdir /user
+hdfs dfs -mkdir/user/input
+hdfs dfs -put input.txt /user/input/
+
+IF USER ALREADY EXISTS  no need to create /user again
+
+hdfs dfs -mkdir /user/input
+hdfs dfs -put input.txt /user/input/
+
+check if  file was uploaded
+
+hdfs dfs -ls /user/input/
+
+4.RUN HADOOP JOB
+
+hadoop jar wc.jar WordCount /user/input/ /user/output/
+
+
