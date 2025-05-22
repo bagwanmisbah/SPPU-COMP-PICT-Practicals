@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Employee Database</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #3498db;
+      color: white;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #e2e2e2;
+    }
+
+    .rating-high {
+      color: green;
+      font-weight: bold;
+    }
+
+    .rating-medium {
+      color: orange;
+    }
+
+    .rating-low {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1> Employee Database</h1>
+
+  <div id="employeeTable"></div>
+
+  <script>
+
+    const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE employees SYSTEM "employee.dtd">
+    <employees>
+        <employee>
+            <id>101</id>
+            <name>Raj Sharma</name>
+            <department>Sales</department>
+            <salary>50000</salary>
+            <position>Sales Manager</position>
+            <email>raj.sharma@company.com</email>
+            <hireDate>2018-05-12</hireDate>
+            <performanceRating>4.5</performanceRating>
+            <location>New Delhi</location>
+        </employee>
+        <employee>
+            <id>102</id>
+            <name>Priya Patel</name>
+            <department>HR</department>
+            <salary>45000</salary>
+            <position>HR Executive</position>
+            <email>priya.patel@company.com</email>
+            <hireDate>2019-02-15</hireDate>
+            <performanceRating>4.2</performanceRating>
+            <location>Mumbai</location>
+        </employee>
+        <employee>
+            <id>103</id>
+            <name>Vikram Singh</name>
+            <department>IT</department>
+            <salary>60000</salary>
+            <position>Software Engineer</position>
+            <email>vikram.singh@company.com</email>
+            <hireDate>2020-07-22</hireDate>
+            <performanceRating>4.7</performanceRating>
+            <location>Bangalore</location>
+        </employee>
+        <employee>
+            <id>104</id>
+            <name>Neha Gupta</name>
+            <department>Marketing</department>
+            <salary>48000</salary>
+            <position>Marketing Specialist</position>
+            <email>neha.gupta@company.com</email>
+            <hireDate>2019-11-03</hireDate>
+            <performanceRating>3.9</performanceRating>
+            <location>Hyderabad</location>
+        </employee>
+        <employee>
+            <id>105</id>
+            <name>Amit Kumar</name>
+            <department>Finance</department>
+            <salary>65000</salary>
+            <position>Financial Analyst</position>
+            <email>amit.kumar@company.com</email>
+            <hireDate>2017-09-18</hireDate>
+            <performanceRating>4.8</performanceRating>
+            <location>Chennai</location>
+        </employee>
+        <employee>
+            <id>106</id>
+            <name>Ananya Reddy</name>
+            <department>IT</department>
+            <salary>72000</salary>
+            <position>Senior Developer</position>
+            <email>ananya.reddy@company.com</email>
+            <hireDate>2016-04-30</hireDate>
+            <performanceRating>4.6</performanceRating>
+            <location>Pune</location>
+        </employee>
+        <employee>
+            <id>107</id>
+            <name>Suresh Mehta</name>
+            <department>Sales</department>
+            <salary>47000</salary>
+            <position>Sales Representative</position>
+            <email>suresh.mehta@company.com</email>
+            <hireDate>2021-01-15</hireDate>
+            <performanceRating>3.5</performanceRating>
+            <location>Kolkata</location>
+        </employee>
+        <employee>
+            <id>108</id>
+            <name>Pooja Verma</name>
+            <department>Operations</department>
+            <salary>55000</salary>
+            <position>Operations Manager</position>
+            <email>pooja.verma@company.com</email>
+            <hireDate>2018-08-07</hireDate>
+            <performanceRating>4.1</performanceRating>
+            <location>Ahmedabad</location>
+        </employee>
+        <employee>
+            <id>109</id>
+            <name>Rahul Malhotra</name>
+            <department>Customer Service</department>
+            <salary>42000</salary>
+            <position>Customer Support</position>
+            <email>rahul.malhotra@company.com</email>
+            <hireDate>2022-03-20</hireDate>
+            <performanceRating>3.8</performanceRating>
+            <location>Jaipur</location>
+        </employee>
+        <employee>
+            <id>110</id>
+            <name>Divya Iyer</name>
+            <department>IT</department>
+            <salary>62000</salary>
+            <position>System Administrator</position>
+            <email>divya.iyer@company.com</email>
+            <hireDate>2020-05-11</hireDate>
+            <performanceRating>4.3</performanceRating>
+            <location>Bangalore</location>
+        </employee>
+        <employee>
+            <id>111</id>
+            <name>Arjun Nair</name>
+            <department>HR</department>
+            <salary>51000</salary>
+            <position>Recruitment Specialist</position>
+            <email>arjun.nair@company.com</email>
+            <hireDate>2019-10-25</hireDate>
+            <performanceRating>4.0</performanceRating>
+            <location>Mumbai</location>
+        </employee>
+        <employee>
+            <id>112</id>
+            <name>Meera Joshi</name>
+            <department>Finance</department>
+            <salary>70000</salary>
+            <position>Senior Accountant</position>
+            <email>meera.joshi@company.com</email>
+            <hireDate>2017-12-08</hireDate>
+            <performanceRating>4.4</performanceRating>
+            <location>New Delhi</location>
+        </employee>
+    </employees>`;
+
+    const xslString = `<?xml version="1.0" encoding="UTF-8"?>
+    <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+        <xsl:output method="html" indent="yes"/>
+        <xsl:template match="/employees">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Hire Date</th>
+                    <th>Salary</th>
+                    <th>Performance</th>
+                </tr>
+                <xsl:for-each select="employee">
+                    <tr>
+                        <td><xsl:value-of select="id"/></td>
+                        <td><xsl:value-of select="name"/></td>
+                        <td><xsl:value-of select="department"/></td>
+                        <td><xsl:value-of select="position"/></td>
+                        <td><xsl:value-of select="email"/></td>
+                        <td><xsl:value-of select="location"/></td>
+                        <td><xsl:value-of select="hireDate"/></td>
+                        <td>Rs.<xsl:value-of select="salary"/></td>
+                        <td>
+                            <xsl:choose>
+                                <xsl:when test="performanceRating >= 4.5">
+                                    <span class="rating-high"><xsl:value-of select="performanceRating"/></span>
+                                </xsl:when>
+                                <xsl:when test="performanceRating >= 4.0">
+                                    <span class="rating-medium"><xsl:value-of select="performanceRating"/></span>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="rating-low"><xsl:value-of select="performanceRating"/></span>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </table>
+        </xsl:template>
+    </xsl:stylesheet>`;
+
+
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, "application/xml");
+    const xslDoc = parser.parseFromString(xslString, "application/xml");
+
+
+    const xsltProcessor = new XSLTProcessor();
+    xsltProcessor.importStylesheet(xslDoc);
+    const resultDocument = xsltProcessor.transformToFragment(xmlDoc, document);
+
+
+    document.getElementById("employeeTable").appendChild(resultDocument);
+  </script>
+
+</body>
+
+</html>
